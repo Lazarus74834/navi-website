@@ -20,35 +20,41 @@
     body {
       position: relative;
     }
+    /* Mobile-optimized navigation */
     nav {
       position: sticky;
       top: 0;
       background: #FFFDF9;
-      padding: 1rem 2rem;
+      padding: 0.8rem 1rem;
       text-align: center;
       z-index: 999;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-around;
     }
     nav a {
-      margin: 0 1rem;
+      margin: 0;
       text-decoration: none;
       color: #3C2F2F;
       font-weight: 600;
+      font-size: 0.9rem;
     }
     header {
       text-align: center;
-      padding: 6rem 2rem 3rem;
+      padding: 4rem 1.5rem 3rem;
       background: linear-gradient(180deg, #FFFDF9 0%, #F3EBDD 100%);
       position: relative;
       overflow: hidden;
     }
-
     header img {
-        width: 120px;
-        border-radius: 24px;
-        animation: popIn 1s ease-in-out;
-      }
-
+      width: 80px;
+      border-radius: 20px;
+      animation: popIn 1s ease-in-out;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
     header::before {
       content: '';
       position: absolute;
@@ -74,34 +80,98 @@
       transform: translateY(0);
       opacity: 1;
     }
+    /* Hero signup styles */
+    /* Hero signup styles */
+    .hero-signup {
+        margin-top: 2rem;
+        background: rgba(255, 253, 249, 0.85);
+        padding: 1.2rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 450px;
+        width: 90%;
+      }
+    .hero-signup h3 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
     @keyframes heroGlow {
       0% { transform: scale(1); opacity: 0.15; }
       100% { transform: scale(1.2); opacity: 0.25; }
     }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      margin-top: 1rem;
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
     }
     h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-top: 3rem;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    h3 {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
     }
     main {
-      max-width: 1100px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 1rem;
     }
+    /* Improved mobile grid layout */
     .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 960px) {
+      .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+      main {
+        max-width: 1100px;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      nav {
+        padding: 1rem 2rem;
+      }
+      nav a {
+        font-size: 1rem;
+        margin: 0 1rem;
+      }
+      header {
+        padding: 6rem 2rem 3rem;
+      }
+      header img {
+        width: 120px;
+      }
     }
     .bento-box {
       background: #FFFDF9;
-      padding: 1.5rem;
+      padding: 1.2rem;
       border-radius: 16px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       transition: transform 0.3s;
@@ -109,61 +179,103 @@
     .bento-box:hover {
       transform: translateY(-4px);
     }
+    /* Improved screenshot gallery for mobile */
     .screenshot-gallery {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 2rem;
-      padding-bottom: 2rem;
+      margin-top: 1.5rem;
+      padding-bottom: 1.5rem;
     }
     .screenshot-gallery img {
-      width: 260px;
-      height: 540px;
+      width: 200px;
+      height: 410px;
       object-fit: cover;
-      border-radius: 24px;
+      border-radius: 20px;
       transform: translateY(0);
       transition: transform 0.8s ease;
+    }
+    @media (min-width: 768px) {
+      .screenshot-gallery img {
+        width: 260px;
+        height: 540px;
+      }
+      .screenshot-gallery {
+        gap: 1.5rem;
+      }
     }
     .screenshot-gallery img:hover {
       transform: translateY(-10px);
     }
+    /* Mobile-optimized buttons */
     .buttons {
       text-align: center;
-      margin: 3rem 0;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .buttons a {
-      display: inline-block;
-      margin: 1rem;
-      padding: 0.75rem 1.5rem;
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
       background-color: #D3785F;
       color: #FFFDF9;
       border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: background-color 0.3s;
+      text-align: center;
+      position: relative;
+    }
+    .coming-soon {
+      position: absolute;
+      top: -10px;
+      right: -5px;
+      background-color: #3C2F2F;
+      color: #FFFDF9;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+      font-weight: normal;
+      transform: rotate(3deg);
+    }
+    @media (min-width: 640px) {
+      .buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .buttons a {
+        width: auto;
+        margin: 0.5rem;
+      }
     }
     .buttons a:hover {
       background-color: #bb5d47;
     }
-    .signup {
-      background: #FFFDF9;
-      padding: 3rem 2rem;
-      text-align: center;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      margin-top: 4rem;
+/* Form in hero styles */
+    #waitlist-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 1rem 0;
     }
-    .signup input[type="email"] {
+    input[type="email"] {
       padding: 0.75rem;
-      width: 250px;
+      width: 100%;
+      max-width: 300px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      margin-right: 0.5rem;
+      margin-bottom: 0.8rem;
       font-size: 1rem;
     }
-    .signup button {
+    button[type="submit"] {
       padding: 0.75rem 1rem;
       font-size: 1rem;
       background-color: #D3785F;
@@ -172,6 +284,21 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      width: 100%;
+      max-width: 300px;
+    }
+    @media (min-width: 640px) {
+      #waitlist-form {
+        flex-direction: row;
+        justify-content: center;
+      }
+      input[type="email"] {
+        margin-right: 0.8rem;
+        margin-bottom: 0;
+      }
+      button[type="submit"] {
+        width: auto;
+      }
     }
     .signup-message {
       font-size: 1.1rem;
@@ -179,6 +306,7 @@
       color: #2d7f2f;
       margin-top: 1rem;
       animation: fadeInPop 0.4s ease-in-out;
+      padding: 0 1rem;
     }
     @keyframes fadeInPop {
       from { opacity: 0; transform: scale(0.9); }
@@ -189,9 +317,9 @@
     }
     footer {
       background-color: #FFFDF9;
-      padding: 2rem;
+      padding: 1.5rem 1rem;
       text-align: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
@@ -200,99 +328,144 @@
   <nav>
     <a href="#why">Why Navi</a>
     <a href="#screenshots">Screenshots</a>
-    <a href="#signup">Join Waitlist</a>
+    <a href="#more">Learn More</a>
   </nav>
   <header>
     <img src="icon.png" alt="Navi App Logo" class="hero-text">
     <h1 class="hero-text">Navi</h1>
     <p class="hero-text">Your Smart Travel Notebook</p>
+    
+    <div class="hero-signup hero-text">
+      <h3>🚀 Be the First to Try</h3>
+      <form id="waitlist-form">
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Join Waitlist</button>
+      </form>
+      <p id="signup-message" class="signup-message"></p>
+    </div>
   </header>
   <main>
     <h2 id="why">📌 Why Navi?</h2>
     <div class="bento-grid">
-      <div class="bento-box"><h3>Smart Trip Management</h3><p>Create, organize, and browse trips with ease. Elegant visuals. Timeline magic.</p></div>
-      <div class="bento-box"><h3>Magic Screenshot Import</h3><p>See a cool place on TikTok? Screenshot it. Navi figures out the rest using AI.</p></div>
-      <div class="bento-box"><h3>Interactive Map Experience</h3><p>Your places, color-coded and tappable. Explore in real-time or plan ahead.</p></div>
-      <div class="bento-box"><h3>AI Travel Assistant</h3><p>Ask questions. Get nearby tips. Plan routes. It’s like having a smart local with you.</p></div>
-      <div class="bento-box"><h3>Beautiful Travel Journal</h3><p>Add notes, photos, and memories. It's a digital scrapbook that lives with you.</p></div>
-      <div class="bento-box"><h3>Privacy & Control</h3><p>Your location, your rules. Navi is built with transparency and trust at its core.</p></div>
+      <div class="bento-box">
+        <h3>Smart Trip Management</h3>
+        <p>Create, organize, and browse trips with ease. Elegant visuals. Timeline magic.</p>
+      </div>
+      <div class="bento-box">
+        <h3>Magic Screenshot Import</h3>
+        <p>See a cool place on TikTok? Screenshot it. Navi figures out the rest using AI.</p>
+      </div>
+      <div class="bento-box">
+        <h3>Interactive Map Experience</h3>
+        <p>Your places, color-coded and tappable. Explore in real-time or plan ahead.</p>
+      </div>
+      <div class="bento-box">
+        <h3>AI Travel Assistant</h3>
+        <p>Ask questions. Get nearby tips. Plan routes. It's like having a smart local with you.</p>
+      </div>
+      <div class="bento-box">
+        <h3>Beautiful Travel Journal</h3>
+        <p>Add notes, photos, and memories. It's a digital scrapbook that lives with you.</p>
+      </div>
+      <div class="bento-box">
+        <h3>Privacy & Control</h3>
+        <p>Your location, your rules. Navi is built with transparency and trust at its core.</p>
+      </div>
     </div>
 
     <h2 id="screenshots">📸 Sneak Peek</h2>
-    <p>Here’s how Navi looks in action:</p>
+    <p>Here's how Navi looks in action:</p>
     <div class="screenshot-gallery">
-      <img src="iPhone1.png" alt="Trip List Screenshot">
-      <img src="iPhone2.png" alt="Map Screenshot">
-      <img src="iPhone3.png" alt="AI Assistant Screenshot">
+      <img src="iPhone1.png" alt="Trip List Screenshot" loading="lazy">
+      <img src="iPhone2.png" alt="Map Screenshot" loading="lazy">
+      <img src="iPhone3.png" alt="AI Assistant Screenshot" loading="lazy">
     </div>
 
-    <h2>🎨 Design You’ll Love</h2>
+    <h2 id="more">🎨 Design You'll Love</h2>
     <p>Warm, map-inspired vibes. Calm typography. Elegant animations. Navi feels like flipping through a notebook you actually want to keep.</p>
 
     <div class="buttons">
-      <a href="#">📥 Download Navi</a>
-      <a href="#">🎥 Watch Demo</a>
-      <a href="#">📖 Learn More</a>
+      <a href="#">📥 Download Navi <span class="coming-soon">Coming Soon</span></a>
+      <a href="#">🎥 Watch Demo <span class="coming-soon">Coming Soon</span></a>
+      <a href="#">📖 Learn More <span class="coming-soon">Coming Soon</span></a>
     </div>
 
-    <section id="signup" class="signup">
-      <h2>🚀 Be the First to Travel Smarter</h2>
-      <p>Join our waitlist and get early access when Navi launches.</p>
-      <form id="waitlist-form">
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-        <button type="submit">Notify Me</button>
-      </form>
-      <p id="signup-message" class="signup-message"></p>
-      <script>
-        let lastSubmitted = '';
-        document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const emailInput = document.getElementById('email');
-          const email = emailInput.value.trim().toLowerCase();
-          const message = document.getElementById('signup-message');
-          if (email === '' || !email.includes('@') || email === lastSubmitted) {
-            message.textContent = 'Please enter a valid and unique email address.';
-            message.classList.add('error-message');
-            return;
-          }
-          lastSubmitted = email;
-          message.textContent = '⏳ Sending...';
-          message.classList.remove('error-message');
-          try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycby9JYj3F6HQKpG7aUqTBaXU0Ezi_sMivq0P5CtiVFdI0lcephQT4UuUOD__ImRd6SZXpw/exec', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: 'email=' + encodeURIComponent(email)
-            });
-            if (response.ok) {
-              message.textContent = '🎉 You’re on the list! Check your inbox soon.';
-              message.classList.remove('error-message');
-              emailInput.value = '';
-            } else {
-              message.textContent = 'Oops! Something went wrong.';
-              message.classList.add('error-message');
-            }
-          } catch (err) {
-            message.textContent = '⚠️ Network error. Try again later.';
-            message.classList.add('error-message');
-          }
-        });
+    <!-- Signup section moved to hero -->
+  </main>
+  <footer>
+    <p>Made with ❤️ for travelers who love the moment.</p>
+    <p>Built by real people who get lost on purpose.</p>
+  </footer>
 
-        window.addEventListener('scroll', () => {
-          const heroText = document.querySelectorAll('.hero-text');
-          heroText.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 50) {
-              el.classList.add('animate');
+  <script>
+    // Handle form submission
+    let lastSubmitted = '';
+    document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      const email = emailInput.value.trim().toLowerCase();
+      const message = document.getElementById('signup-message');
+      
+      if (email === '' || !email.includes('@') || email === lastSubmitted) {
+        message.textContent = 'Please enter a valid and unique email address.';
+        message.classList.add('error-message');
+        return;
+      }
+      
+      lastSubmitted = email;
+      message.textContent = '⏳ Sending...';
+      message.classList.remove('error-message');
+      
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycby9JYj3F6HQKpG7aUqTBaXU0Ezi_sMivq0P5CtiVFdI0lcephQT4UuUOD__ImRd6SZXpw/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'email=' + encodeURIComponent(email)
+        });
+        
+        if (response.ok) {
+          message.textContent = "🎉 You're on the list! Check your inbox soon.";
+          message.classList.remove('error-message');
+          emailInput.value = '';
+        } else {
+          message.textContent = 'Oops! Something went wrong.';
+          message.classList.add('error-message');
+        }
+      } catch (err) {
+        message.textContent = '⚠️ Network error. Try again later.';
+        message.classList.add('error-message');
+      }
+    });
+
+    // Animation for hero text
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const heroText = document.querySelectorAll('.hero-text');
+        heroText.forEach(function(el) {
+          el.classList.add('animate');
+        });
+      }, 100);
+    });
+
+    // Lazy loading for performance
+    document.addEventListener('DOMContentLoaded', function() {
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const imageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.getAttribute('data-src') || img.src;
+              imageObserver.unobserve(img);
             }
           });
         });
-      </script>
-    </section>
-  </main>
-  <footer>
-    <p>Made with ❤️ for travelers who love the moment. Built by real people who get lost on purpose.</p>
-    <p><em>[Placeholder for footer links or social icons]</em></p>
-  </footer>
+        
+        lazyImages.forEach(function(img) {
+          imageObserver.observe(img);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
