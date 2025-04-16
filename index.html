@@ -3,138 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navi - Your Smart Travel Notebook</title>
+  <title>Navi – Your Smart Travel Notebook</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fdfaf6;
-      color: #2d2d2d;
-      line-height: 1.6;
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
       margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #F3EBDD;
+      color: #3C2F2F;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    body {
+      position: relative;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #FFFDF9;
+      padding: 1rem 2rem;
+      text-align: center;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #3C2F2F;
+      font-weight: 600;
     }
     header {
-      background-color: #f8e9d6;
-      padding: 2rem;
       text-align: center;
+      padding: 6rem 2rem 3rem;
+      background: linear-gradient(180deg, #FFFDF9 0%, #F3EBDD 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header img {
+        width: 120px;
+        border-radius: 24px;
+        animation: popIn 1s ease-in-out;
+      }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, #FFFDF9 0%, #F3EBDD 100%);
+      animation: heroGlow 8s infinite alternate ease-in-out;
+      z-index: 0;
+      opacity: 0.2;
+    }
+    header * {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-text {
+      transform: translateY(40px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+    .hero-text.animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    @keyframes heroGlow {
+      0% { transform: scale(1); opacity: 0.15; }
+      100% { transform: scale(1.2); opacity: 0.25; }
     }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      margin-top: 1rem;
     }
     h2 {
       font-family: 'Playfair Display', serif;
-      color: #654321;
+      font-size: 2rem;
+      margin-top: 3rem;
     }
     main {
-      padding: 2rem;
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
-    }
-    ul {
-      padding-left: 1.5rem;
-    }
-    .category {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
-    }
-    footer {
-      text-align: center;
       padding: 2rem;
-      background-color: #f1e3d3;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .bento-box {
+      background: #FFFDF9;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .bento-box:hover {
+      transform: translateY(-4px);
+    }
+    .screenshot-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .screenshot-gallery img {
+      width: 260px;
+      height: 540px;
+      object-fit: cover;
+      border-radius: 24px;
+      transform: translateY(0);
+      transition: transform 0.8s ease;
+    }
+    .screenshot-gallery img:hover {
+      transform: translateY(-10px);
+    }
+    .buttons {
+      text-align: center;
+      margin: 3rem 0;
     }
     .buttons a {
       display: inline-block;
       margin: 1rem;
       padding: 0.75rem 1.5rem;
-      background-color: #ff7e5f;
-      color: white;
-      border-radius: 8px;
+      background-color: #D3785F;
+      color: #FFFDF9;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
     }
     .buttons a:hover {
-      background-color: #eb6841;
+      background-color: #bb5d47;
+    }
+    .signup {
+      background: #FFFDF9;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin-top: 4rem;
+    }
+    .signup input[type="email"] {
+      padding: 0.75rem;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+    .signup button {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      background-color: #D3785F;
+      color: #FFFDF9;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .signup-message {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2d7f2f;
+      margin-top: 1rem;
+      animation: fadeInPop 0.4s ease-in-out;
+    }
+    @keyframes fadeInPop {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .error-message {
+      color: #bb4444;
+    }
+    footer {
+      background-color: #FFFDF9;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.95rem;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <nav>
+    <a href="#why">Why Navi</a>
+    <a href="#screenshots">Screenshots</a>
+    <a href="#signup">Join Waitlist</a>
+  </nav>
   <header>
-    <h1>Navi</h1>
-    <p>Your Smart Travel Notebook</p>
+    <img src="icon.png" alt="Navi App Logo" class="hero-text">
+    <h1 class="hero-text">Navi</h1>
+    <p class="hero-text">Your Smart Travel Notebook</p>
   </header>
   <main>
-    <section>
-      <p>Navi is a beautifully designed cross-platform app that revolutionizes how travelers plan and experience their trips. Inspired by travel journals and maps, Navi blends functionality with a warm, intuitive aesthetic.</p>
-    </section>
+    <h2 id="why">📌 Why Navi?</h2>
+    <div class="bento-grid">
+      <div class="bento-box"><h3>Smart Trip Management</h3><p>Create, organize, and browse trips with ease. Elegant visuals. Timeline magic.</p></div>
+      <div class="bento-box"><h3>Magic Screenshot Import</h3><p>See a cool place on TikTok? Screenshot it. Navi figures out the rest using AI.</p></div>
+      <div class="bento-box"><h3>Interactive Map Experience</h3><p>Your places, color-coded and tappable. Explore in real-time or plan ahead.</p></div>
+      <div class="bento-box"><h3>AI Travel Assistant</h3><p>Ask questions. Get nearby tips. Plan routes. It’s like having a smart local with you.</p></div>
+      <div class="bento-box"><h3>Beautiful Travel Journal</h3><p>Add notes, photos, and memories. It's a digital scrapbook that lives with you.</p></div>
+      <div class="bento-box"><h3>Privacy & Control</h3><p>Your location, your rules. Navi is built with transparency and trust at its core.</p></div>
+    </div>
 
-    <section>
-      <h2>Core Features</h2>
-      <ul>
-        <li><strong>Smart Trip Management</strong><br>
-          - Create and organize trips<br>
-          - Elegant trip interface with duration tracking</li>
-        <li><strong>Intelligent Place Organization</strong><br>
-          - Add places with details & notes<br>
-          - Categorize as:
-            <div class="category">🏨 Places to Stay</div>
-            <div class="category">🍴 Places to Eat</div>
-            <div class="category">🏛️ Places to Visit</div>
-            <div class="category">📸 Photo Spots</div>
-        </li>
-        <li><strong>Magic Screenshot Import</strong><br>
-          - Upload travel content screenshots<br>
-          - Use AI to extract and add locations instantly</li>
-        <li><strong>Interactive Map Experience</strong><br>
-          - View places on an interactive map<br>
-          - Color-coded pins & real-time tracking</li>
-        <li><strong>Smart Notifications</strong><br>
-          - Alerts when you're near saved places<br>
-          - Tap for directions and info</li>
-        <li><strong>AI Travel Assistant</strong><br>
-          - Chat with Navi to get suggestions<br>
-          - Smart routes, recommendations & Q&A</li>
-        <li><strong>Travel Journal</strong><br>
-          - Add photos & notes to trips<br>
-          - Capture memories forever</li>
-      </ul>
-    </section>
+    <h2 id="screenshots">📸 Sneak Peek</h2>
+    <p>Here’s how Navi looks in action:</p>
+    <div class="screenshot-gallery">
+      <img src="iPhone1.png" alt="Trip List Screenshot">
+      <img src="iPhone2.png" alt="Map Screenshot">
+      <img src="iPhone3.png" alt="AI Assistant Screenshot">
+    </div>
 
-    <section>
-      <h2>Design & Experience</h2>
-      <p>Navi is warm and inviting, using a color palette and typography that makes planning feel like part of the adventure. With intuitive navigation, responsive design, and delightful transitions, Navi is built for travelers who love being in the moment.</p>
-    </section>
+    <h2>🎨 Design You’ll Love</h2>
+    <p>Warm, map-inspired vibes. Calm typography. Elegant animations. Navi feels like flipping through a notebook you actually want to keep.</p>
 
-    <section>
-      <h2>Technical Excellence</h2>
-      <ul>
-        <li>Built with React Native and Expo</li>
-        <li>Advanced location and map services</li>
-        <li>Real-time updates and secure data sync</li>
-        <li>Optimized for performance</li>
-      </ul>
-    </section>
+    <div class="buttons">
+      <a href="#">📥 Download Navi</a>
+      <a href="#">🎥 Watch Demo</a>
+      <a href="#">📖 Learn More</a>
+    </div>
 
-    <section>
-      <h2>Privacy & Security</h2>
-      <ul>
-        <li>Secure authentication</li>
-        <li>Clear location permission management</li>
-        <li>Data privacy and transparency</li>
-      </ul>
-    </section>
+    <section id="signup" class="signup">
+      <h2>🚀 Be the First to Travel Smarter</h2>
+      <p>Join our waitlist and get early access when Navi launches.</p>
+      <form id="waitlist-form">
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Notify Me</button>
+      </form>
+      <p id="signup-message" class="signup-message"></p>
+      <script>
+        let lastSubmitted = '';
+        document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const emailInput = document.getElementById('email');
+          const email = emailInput.value.trim().toLowerCase();
+          const message = document.getElementById('signup-message');
+          if (email === '' || !email.includes('@') || email === lastSubmitted) {
+            message.textContent = 'Please enter a valid and unique email address.';
+            message.classList.add('error-message');
+            return;
+          }
+          lastSubmitted = email;
+          message.textContent = '⏳ Sending...';
+          message.classList.remove('error-message');
+          try {
+            const response = await fetch('https://script.google.com/macros/s/AKfycby9JYj3F6HQKpG7aUqTBaXU0Ezi_sMivq0P5CtiVFdI0lcephQT4UuUOD__ImRd6SZXpw/exec', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: 'email=' + encodeURIComponent(email)
+            });
+            if (response.ok) {
+              message.textContent = '🎉 You’re on the list! Check your inbox soon.';
+              message.classList.remove('error-message');
+              emailInput.value = '';
+            } else {
+              message.textContent = 'Oops! Something went wrong.';
+              message.classList.add('error-message');
+            }
+          } catch (err) {
+            message.textContent = '⚠️ Network error. Try again later.';
+            message.classList.add('error-message');
+          }
+        });
 
-    <section class="buttons">
-      <a href="#">Download Now</a>
-      <a href="#">Learn More</a>
-      <a href="#">Watch Demo</a>
+        window.addEventListener('scroll', () => {
+          const heroText = document.querySelectorAll('.hero-text');
+          heroText.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 50) {
+              el.classList.add('animate');
+            }
+          });
+        });
+      </script>
     </section>
   </main>
-
   <footer>
-    <p>Made with ❤️ for spontaneous travelers everywhere.</p>
+    <p>Made with ❤️ for travelers who love the moment. Built by real people who get lost on purpose.</p>
+    <p><em>[Placeholder for footer links or social icons]</em></p>
   </footer>
 </body>
 </html>
