@@ -1,19 +1,19 @@
 # 🌍 Navi – Your Smart Travel Notebook
 
-**Navi** is a beautifully designed cross-platform mobile app that revolutionizes how travelers plan and experience their trips. With a warm, journal-inspired aesthetic, Navi blends powerful features with an intuitive, spontaneous interface.
+**Navi** is a beautifully designed cross-platform mobile app that revolutionises how travellers plan and experience their trips. With a warm, journal-inspired aesthetic, Navi blends powerful features with an intuitive, spontaneous interface.
 
 This site is the official GitHub Pages landing page for Navi.  
-👉 [View the Website]([https://your-username.github.io/navi-website/](https://lazarus74834.github.io/navi-website/)
+👉 [[View the Website](https://lazarus74834.github.io/navi-website/)]
 
 ---
 
 ## ✨ Core Features
 
 - **Smart Trip Management**  
-  Organize trips with custom names and dates in an elegant interface.
+  Organise trips with custom names and dates in an elegant interface.
 
-- **Intelligent Place Organization**  
-  Add and categorize places with notes:
+- **Intelligent Place Organisation**  
+  Add and categorise places with notes:
   - 🏨 Places to Stay  
   - 🍴 Places to Eat  
   - 🏛️ Places to Visit  
@@ -23,7 +23,7 @@ This site is the official GitHub Pages landing page for Navi.
   Upload travel screenshots (e.g., TikToks, Instagram), extract location info using AI, and add them to your trips.
 
 - **Interactive Map Experience**  
-  Real-time map with color-coded pins and quick access to directions.
+  Real-time map with colour-coded pins and quick access to directions.
 
 - **Smart Notifications**  
   Get alerts when you're near saved places with customizable thresholds.
@@ -41,7 +41,7 @@ This site is the official GitHub Pages landing page for Navi.
 - **React Native + Expo** for cross-platform support  
 - **Real-time Maps & Location Services**  
 - **Secure Authentication & Data Sync**  
-- **Optimized for Performance and Privacy**
+- **Optimised for Performance and Privacy**
 
 ---
 
