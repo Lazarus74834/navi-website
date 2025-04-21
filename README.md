@@ -3,7 +3,7 @@
 **Navi** is a beautifully designed cross-platform mobile app that revolutionizes how travelers plan and experience their trips. With a warm, journal-inspired aesthetic, Navi blends powerful features with an intuitive, spontaneous interface.
 
 This site is the official GitHub Pages landing page for Navi.  
-👉 [View the Website](https://your-username.github.io/navi-website/) ← (Replace with your actual link)
+👉 [View the Website]([https://your-username.github.io/navi-website/](https://lazarus74834.github.io/navi-website/)
 
 ---
 
