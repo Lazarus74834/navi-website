@@ -57,7 +57,7 @@ const MapSection = () => {
       const loadAppleMapsAPI = () => {
         // Create a script element
         const script = document.createElement('script')
-        script.src = `https://maps.apple.com/maps/api/js?key=${import.meta.env.VITE_APPLE_MAPS_KEY}&callback=initMap`
+        script.src = `https://maps.apple.com/maps/api/js?jwt=${import.meta.env.VITE_APPLE_MAPS_JWT}&callback=initMap`
         script.async = true
         script.defer = true
 
