@@ -51,7 +51,11 @@ const Logo = styled.div`
   
   img {
     width: 80px;
+    max-width: 100%;
+    height: auto;
     border-radius: 20px;
+    display: block;
+    margin: 0 auto;
     
     @media (min-width: ${theme.breakpoints.lg}) {
       width: 120px;

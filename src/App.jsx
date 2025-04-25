@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
 import Features from './components/Features'
-import MapSection from './components/MapSection'
+// import MapSection from './components/MapSection' // Temporarily hidden
 import Screenshots from './components/Screenshots'
 import Design from './components/Design'
 import Roadmap from './components/Roadmap'
@@ -16,7 +16,7 @@ const App = () => {
       <Header />
       <main>
         <Features />
-        <MapSection />
+        {/* <MapSection /> */}
         <Screenshots />
         <Design />
         <Roadmap />
