@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/navi-website/', // Repository name for GitHub Pages
+  base: '/', // Base URL for custom domain
   server: {
     port: 3000,
   },
