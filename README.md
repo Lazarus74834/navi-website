@@ -44,7 +44,7 @@ npm run build
 
 ### Environment Variables
 
-- `VITE_APPLE_MAPS_KEY`: Your Apple Maps API key
+- `VITE_APPLE_MAPS_JWT`: Your Apple Maps JWT token
 
 ---
 
@@ -82,7 +82,7 @@ npm run build
 - **React** - UI framework
 - **Vite** - Build tool and development server
 - **Styled Components** - CSS-in-JS styling
-- **Apple Maps API** - Interactive mapping
+- **Apple MapKit JS** - Interactive mapping
 - **Web APIs** - For native features like lazy loading
 
 ---
