@@ -55,15 +55,23 @@ const MapSection = () => {
     // This will ensure we only run on client side
     if (typeof window !== 'undefined') {
       const loadAppleMapsAPI = () => {
-        // Create a script element
+        // Create a script element for Apple's official MapKit JS
         const script = document.createElement('script')
-        script.src = `https://maps.apple.com/maps/api/js?jwt=${import.meta.env.VITE_APPLE_MAPS_JWT}&callback=initMap`
+        script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js'
         script.async = true
         script.defer = true
-
-        // Define a global initMap function that will be called when the Maps API loads
-        window.initMap = () => {
+        
+        script.onload = () => {
           try {
+            // Initialize MapKit with JWT through authorization callback
+            window.mapkit.init({
+              authorizationCallback: function(done) {
+                // Use environment variable for JWT
+                const jwt = import.meta.env.VITE_APPLE_MAPS_JWT || '';
+                done(jwt);
+              }
+            });
+            
             // Create sample data
             const savedPlaces = [
               {
@@ -94,86 +102,62 @@ const MapSection = () => {
                 trip: "New York",
                 color: "#4A90E2"
               }
-            ]
+            ];
             
-            // Check if Apple Maps API is available
-            if (window.apple && window.apple.maps) {
-              // Create map
-              const map = new window.apple.maps.Map(document.getElementById('map-container'), {
-                center: { lat: 37.7749, lng: -122.4194 },
-                zoom: 4,
-                mapTypeId: window.apple.maps.MapTypeId.STANDARD,
-                showsUserLocation: true,
-                showsCompass: true,
-                showsScale: true
-              })
-  
-              // Add markers for each saved place
-              savedPlaces.forEach(place => {
-                const marker = new window.apple.maps.Marker({
-                  position: { lat: place.lat, lng: place.lng },
-                  map: map,
+            // Create map with Apple's official MapKit
+            const map = new window.mapkit.Map('map-container', {
+              showsMapTypeControl: true,
+              showsZoomControl: true,
+              showsUserLocationControl: true,
+              showsScale: true
+            });
+            
+            // Set the map region to show all points
+            map.region = new window.mapkit.CoordinateRegion(
+              new window.mapkit.Coordinate(39.8283, -98.5795), // Center of US
+              new window.mapkit.CoordinateSpan(30, 60) // Wide span to show points
+            );
+            
+            // Add annotations (markers) for each saved place
+            savedPlaces.forEach(place => {
+              const annotation = new window.mapkit.MarkerAnnotation(
+                new window.mapkit.Coordinate(place.lat, place.lng), {
                   title: place.name,
-                  icon: {
-                    path: window.apple.maps.SymbolPath.CIRCLE,
-                    fillColor: place.color,
-                    fillOpacity: 0.8,
-                    strokeWeight: 2,
-                    strokeColor: theme.colors.ivory,
-                    scale: 8
-                  }
-                })
-  
-                // Add click listener to show info window
-                marker.addListener('click', () => {
-                  const infoWindow = new window.apple.maps.InfoWindow({
-                    content: `
-                      <div style="padding: 8px;">
-                        <h3 style="margin: 0 0 4px 0; font-size: 16px;">${place.name}</h3>
-                        <p style="margin: 0; font-size: 14px; color: #666;">${place.trip}</p>
-                      </div>
-                    `
-                  })
-                  infoWindow.open(map, marker)
-                })
-              })
-              
-              setIsLoading(false)
-            } else {
-              // Apple Maps API not available
-              console.error('Apple Maps API not available')
-              setHasError(true)
-              setIsLoading(false)
-            }
+                  subtitle: place.trip,
+                  color: place.color
+                }
+              );
+              map.addAnnotation(annotation);
+            });
+            
+            setIsLoading(false);
           } catch (error) {
-            console.error('Error initializing map:', error)
-            setHasError(true)
-            setIsLoading(false)
+            console.error('Error initializing map:', error);
+            setHasError(true);
+            setIsLoading(false);
           }
-        }
+        };
         
         // Handle script loading error
         script.onerror = () => {
-          console.error('Failed to load Apple Maps API')
-          setHasError(true)
-          setIsLoading(false)
-        }
+          console.error('Failed to load Apple MapKit JS');
+          setHasError(true);
+          setIsLoading(false);
+        };
         
         // Add script to document
-        document.head.appendChild(script)
-      }
+        document.head.appendChild(script);
+      };
       
       // Check if we're on allowed domain
-      const currentDomain = window.location.hostname
-      const allowedDomain = 'navi-travel.com'
+      const currentDomain = window.location.hostname;
+      const allowedDomains = ['navi-travel.com', 'localhost', '127.0.0.1'];
       
-      if (currentDomain === allowedDomain || 
-          currentDomain === 'localhost' ||
-          currentDomain === '127.0.0.1') {
-        loadAppleMapsAPI()
+      if (allowedDomains.includes(currentDomain)) {
+        loadAppleMapsAPI();
       } else {
-        setHasError(true)
-        setIsLoading(false)
+        setHasError(true);
+        setIsLoading(false);
       }
     }
   }, [])
