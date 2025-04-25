@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_APPLE_MAPS_KEY: ${{ secrets.VITE_APPLE_MAPS_KEY }}
+          VITE_APPLE_MAPS_JWT: ${{ secrets.VITE_APPLE_MAPS_JWT }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
