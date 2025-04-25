@@ -2,8 +2,49 @@
 
 **Navi** is a beautifully designed cross-platform mobile app that revolutionises how travellers plan and experience their trips. With a warm, journal-inspired aesthetic, Navi blends powerful features with an intuitive, spontaneous interface.
 
-This site is the official GitHub Pages landing page for Navi.  
-👉 [[View the Website](https://lazarus74834.github.io/navi-website/)]
+This is the official React landing page for Navi, built with Vite.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+)
+- npm (v8+)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/navi-website-react.git
+cd navi-website-react
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env
+```
+Then edit the `.env` file with your API keys.
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+5. Build for production:
+```bash
+npm run build
+```
+
+### Environment Variables
+
+- `VITE_APPLE_MAPS_KEY`: Your Apple Maps API key
 
 ---
 
@@ -36,25 +77,31 @@ This site is the official GitHub Pages landing page for Navi.
 
 ---
 
-## 🛠 Built With
+## 🧰 Tech Stack
 
-- **React Native + Expo** for cross-platform support  
-- **Real-time Maps & Location Services**  
-- **Secure Authentication & Data Sync**  
-- **Optimised for Performance and Privacy**
-
----
-
-## 📸 Screenshots & Demo
-
-*Coming soon!* Want to contribute visuals or ideas? [Open an issue](https://github.com/your-username/navi-website/issues)!
+- **React** - UI framework
+- **Vite** - Build tool and development server
+- **Styled Components** - CSS-in-JS styling
+- **Apple Maps API** - Interactive mapping
+- **Web APIs** - For native features like lazy loading
 
 ---
 
-## 📡 Live Site
+## 📁 Project Structure
 
-Visit: [https://your-username.github.io/navi-website/](https://your-username.github.io/navi-website/)  
-*(Replace `your-username` with your GitHub username)*
+```
+navi-website-react/
+├── src/
+│   ├── assets/
+│   │   └── images/ - Optimized WebP images
+│   ├── components/
+│   │   ├── common/ - Reusable components
+│   │   └── styled/ - Styled components
+│   └── styles/
+│       ├── GlobalStyles.jsx - Global CSS
+│       └── theme.js - Design tokens
+└── public/ - Static assets
+```
 
 ---
 
