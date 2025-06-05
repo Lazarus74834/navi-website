@@ -52,16 +52,36 @@ const HeroContent = styled.div`
   margin: 0 auto;
   
   .hero-title {
-    font-family: ${theme.typography.fontFamily.section};
-    font-size: ${theme.typography.fontSize['4xl']};
-    font-weight: ${theme.typography.fontWeight.bold};
+    font-family: Georgia, serif;
+    font-size: ${theme.typography.fontSize['5xl']};
+    font-weight: ${theme.typography.fontWeight.normal};
     color: ${theme.colors.charcoal};
     margin-bottom: ${theme.spacing.md};
     line-height: ${theme.typography.lineHeight.tight};
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${theme.spacing.md};
     
     @media (min-width: ${theme.breakpoints.md}) {
-      font-size: ${theme.typography.fontSize['5xl']};
+      font-size: 4rem;
+    }
+    
+    @media (min-width: ${theme.breakpoints.lg}) {
+      font-size: 5rem;
+    }
+    
+    .hero-icon {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      flex-shrink: 0;
+      
+      @media (min-width: ${theme.breakpoints.md}) {
+        width: 80px;
+        height: 80px;
+      }
     }
   }
   
@@ -185,7 +205,17 @@ const Header = () => {
     <HeaderContainer ref={headerRef}>
       
       <HeroContent>
-        <h1 className="hero-title">Navi</h1>
+        <h1 className="hero-title">
+          Navi
+          <OptimizedImage 
+            src="./favicon.png" 
+            alt="Navi Icon" 
+            width="80"
+            height="80"
+            loading="eager"
+            className="hero-icon"
+          />
+        </h1>
         <p className="hero-subtitle">Inspired, not planned</p>
         <p className="hero-description">
           Collect, organise, and navigate to the places that matter most — with a travel notebook built for the way you explore.

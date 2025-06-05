@@ -52,9 +52,9 @@ const LogoContainer = styled.div`
   }
   
   .logo-text {
-    font-family: ${theme.typography.fontFamily.section};
-    font-size: ${theme.typography.fontSize.xl};
-    font-weight: ${theme.typography.fontWeight.bold};
+    font-family: Georgia, serif;
+    font-size: ${theme.typography.fontSize['2xl']};
+    font-weight: ${theme.typography.fontWeight.normal};
     color: ${theme.colors.charcoal};
     text-decoration: none;
   }
