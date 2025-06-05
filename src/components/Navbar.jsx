@@ -14,7 +14,7 @@ const NavContainer = styled.nav`
   border-bottom: 1px solid ${theme.colors.sand};
   z-index: ${theme.zIndex.dropdown};
   transition: all ${theme.transitions.default};
-  transform: translateY(${props => props.isVisible ? '0' : '-100%'});
+  transform: translateY(0);
   
   /* Frosted glass effect */
   background: rgba(254, 252, 248, 0.85);
@@ -181,34 +181,25 @@ const ScrollProgress = styled.div`
   height: 2px;
   background: linear-gradient(135deg, ${theme.colors.vibrantPink}, ${theme.colors.energeticOrange});
   width: ${props => props.progress}%;
-  transition: width 0.1s ease;
+  transition: width 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width;
 `
 
 const Navbar = () => {
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false
+    
+    const updateScrollProgress = () => {
       const currentScrollY = window.scrollY
-      
-      // Hide/show navbar based on scroll direction
-      if (currentScrollY < lastScrollY || currentScrollY < 100) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-        setIsMobileMenuOpen(false)
-      }
-      
-      setLastScrollY(currentScrollY)
       
       // Calculate scroll progress
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight
       const progress = (currentScrollY / totalHeight) * 100
-      setScrollProgress(Math.min(progress, 100))
+      setScrollProgress(Math.min(Math.max(progress, 0), 100))
       
       // Update active section
       const sections = ['why', 'screenshots', 'more']
@@ -224,11 +215,20 @@ const Navbar = () => {
       if (currentSection) {
         setActiveSection(currentSection)
       }
+      
+      ticking = false
+    }
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollProgress)
+        ticking = true
+      }
     }
     
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [])
   
   const navLinks = [
     { href: '#why', label: 'Features' },
@@ -246,7 +246,7 @@ const Navbar = () => {
   }
   
   return (
-    <NavContainer isVisible={isVisible}>
+    <NavContainer>
       <div className="container">
         <LogoContainer onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <OptimizedImage 

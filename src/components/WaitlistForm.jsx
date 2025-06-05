@@ -137,31 +137,37 @@ const Toast = styled.div`
   position: fixed;
   top: ${theme.spacing.lg};
   right: ${theme.spacing.lg};
-  background: linear-gradient(135deg, ${theme.colors.softGreen}, ${theme.colors.energeticOrange});
+  background: linear-gradient(135deg, #5FAE5F, #E85A32);
   color: white;
   padding: ${theme.spacing.md} ${theme.spacing.lg};
   border-radius: ${theme.borderRadius.md};
   box-shadow: ${theme.shadows.lg};
-  transform: translateX(400px);
-  transition: transform ${theme.transitions.slow};
   z-index: ${theme.zIndex.modal};
   max-width: 300px;
   font-size: ${theme.typography.fontSize.sm};
   font-weight: ${theme.typography.fontWeight.medium};
   
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100%) scale(0.9);
+  transition: all ${theme.transitions.default};
+  
   &.show {
-    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
   }
   
   @media (max-width: ${theme.breakpoints.sm}) {
     left: ${theme.spacing.md};
     right: ${theme.spacing.md};
     top: ${theme.spacing.lg};
-    transform: translateY(-100px);
     max-width: none;
+    transform: translateY(-100px) scale(0.9);
     
     &.show {
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 `
