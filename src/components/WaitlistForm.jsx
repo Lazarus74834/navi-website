@@ -5,94 +5,164 @@ import { theme } from '../styles/theme'
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: ${theme.spacing.md};
   width: 100%;
-  margin: 1rem 0;
+  max-width: 400px;
+  margin: 0 auto;
+`
+
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `
 
 const EmailInput = styled.input`
-  padding: 0.75rem;
   width: 100%;
-  max-width: 300px;
-  border-radius: ${theme.borderRadius.default};
-  border: 1px solid #ccc;
-  margin-bottom: 0.8rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  font-size: ${theme.typography.fontSize.base};
+  font-family: ${theme.typography.fontFamily.primary};
+  background: ${theme.colors.warmWhite};
+  border: 2px solid ${theme.colors.sand};
+  border-radius: ${theme.borderRadius.md};
+  transition: all ${theme.transitions.default};
+  color: ${theme.colors.charcoal};
+  
+  &::placeholder {
+    color: ${theme.colors.warmGray400};
+    font-style: italic;
+  }
   
   &:focus {
     outline: none;
-    border-color: ${theme.colors.clay};
-    box-shadow: 0 0 0 2px rgba(211, 120, 95, 0.2);
+    border-color: ${theme.colors.vibrantPink};
+    background: ${theme.colors.warmWhite};
+    box-shadow: 0 0 0 4px rgba(232, 90, 138, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  &:valid {
+    border-color: ${theme.colors.softGreen};
+    
+    &:focus {
+      border-color: ${theme.colors.softGreen};
+      box-shadow: 0 0 0 4px rgba(143, 174, 143, 0.1);
+    }
   }
 `
 
 const SubmitButton = styled.button`
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  background-color: ${theme.colors.clay};
-  color: ${theme.colors.ivory};
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  font-size: ${theme.typography.fontSize.base};
+  font-weight: ${theme.typography.fontWeight.semibold};
+  font-family: ${theme.typography.fontFamily.primary};
+  background: linear-gradient(135deg, ${theme.colors.vibrantPink}, ${theme.colors.energeticOrange});
+  color: white;
   border: none;
-  border-radius: ${theme.borderRadius.default};
+  border-radius: ${theme.borderRadius.md};
   cursor: pointer;
-  font-weight: bold;
-  width: 100%;
-  max-width: 300px;
-  transition: all 0.3s ease;
+  transition: all ${theme.transitions.default};
   position: relative;
+  overflow: hidden;
+  
+  /* Subtle shimmer effect */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
   
   &:hover {
-    background-color: #bb5d47;
     transform: translateY(-2px);
+    box-shadow: ${theme.shadows.md};
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
   
   &:disabled {
-    background-color: #ccc;
+    background: ${theme.colors.warmGray400};
     cursor: not-allowed;
     transform: none;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  &:focus-visible {
+    outline: 2px solid ${theme.colors.vibrantPink};
+    outline-offset: 2px;
   }
 `
 
 const LoadingSpinner = styled.div`
-  display: ${props => props.isLoading ? 'block' : 'none'};
-  width: 20px;
-  height: 20px;
-  border: 2px solid ${theme.colors.ivory};
-  border-top: 2px solid transparent;
+  display: ${props => props.isLoading ? 'inline-block' : 'none'};
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  animation: spin 0.8s linear infinite;
+  margin-left: ${theme.spacing.xs};
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `
 
-const Message = styled.p`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: ${props => props.isError ? '#bb4444' : '#2d7f2f'};
-  margin-top: 1rem;
-  animation: fadeInPop 0.4s ease-in-out;
-  padding: 0 1rem;
+const Message = styled.div`
+  font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${props => props.isError ? theme.colors.error : theme.colors.success};
+  background: ${props => props.isError ? `${theme.colors.error}10` : `${theme.colors.success}10`};
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  border-radius: ${theme.borderRadius.default};
+  border: 1px solid ${props => props.isError ? `${theme.colors.error}30` : `${theme.colors.success}30`};
+  text-align: center;
+  animation: fadeInUp 0.3s ease-out;
 `
 
 const Toast = styled.div`
   position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2d7f2f;
+  top: ${theme.spacing.lg};
+  right: ${theme.spacing.lg};
+  background: linear-gradient(135deg, ${theme.colors.softGreen}, ${theme.colors.energeticOrange});
   color: white;
-  padding: 1rem 2rem;
-  border-radius: ${theme.borderRadius.default};
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.md};
+  box-shadow: ${theme.shadows.lg};
+  transform: translateX(400px);
+  transition: transform ${theme.transitions.slow};
+  z-index: ${theme.zIndex.modal};
+  max-width: 300px;
+  font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${theme.typography.fontWeight.medium};
   
   &.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-1rem);
+    transform: translateX(0);
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    left: ${theme.spacing.md};
+    right: ${theme.spacing.md};
+    top: ${theme.spacing.lg};
+    transform: translateY(-100px);
+    max-width: none;
+    
+    &.show {
+      transform: translateY(0);
+    }
   }
 `
 
@@ -150,26 +220,35 @@ const WaitlistForm = () => {
   return (
     <>
       <Form id="waitlist-form" onSubmit={handleSubmit}>
-        <EmailInput 
-          type="email" 
-          id="email" 
-          name="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <InputWrapper>
+          <EmailInput 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="your.email@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
+        </InputWrapper>
         <SubmitButton type="submit" disabled={isLoading}>
-          Join Waitlist
-          <LoadingSpinner isLoading={isLoading} />
+          {isLoading ? (
+            <>
+              Joining...
+              <LoadingSpinner isLoading={isLoading} />
+            </>
+          ) : (
+            'Join the Waitlist'
+          )}
         </SubmitButton>
+        
+        {message && (
+          <Message isError={isError} id="signup-message">
+            {message}
+          </Message>
+        )}
       </Form>
-      
-      {message && (
-        <Message isError={isError} id="signup-message">
-          {message}
-        </Message>
-      )}
       
       <Toast className={showToast ? 'show' : ''} id="success-toast">
         {toastMessage}

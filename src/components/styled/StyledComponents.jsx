@@ -33,10 +33,13 @@ export const BentoBox = styled.div`
   padding: 1.2rem;
   border-radius: ${theme.borderRadius.default};
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s;
+  transition: all 0.3s ease;
+  border-left: 4px solid ${theme.colors.pink};
   
   &:hover {
     transform: translateY(-4px);
+    border-left-color: ${theme.colors.logoGreen};
+    box-shadow: 0 15px 30px rgba(187, 204, 187, 0.15);
   }
 `
 
@@ -111,23 +114,53 @@ export const ComingSoonBadge = styled.span`
 `
 
 export const ScreenshotGallery = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  overflow: hidden;
   margin-top: 1.5rem;
   padding-bottom: 1.5rem;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to right, ${theme.colors.sand}, transparent);
+    z-index: 2;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to left, ${theme.colors.sand}, transparent);
+    z-index: 2;
+  }
+`
+
+export const ScrollingContainer = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  animation: scroll 20s linear infinite;
   
   picture, img {
+    flex-shrink: 0;
     width: 200px;
     height: 410px;
     object-fit: cover;
     border-radius: 20px;
-    transform: translateY(0);
-    transition: transform 0.8s ease;
+    border: 3px solid ${theme.colors.pink};
+    box-shadow: 0 8px 25px rgba(207, 139, 148, 0.15);
+    transition: transform 0.3s ease;
     
     &:hover {
-      transform: translateY(-10px);
+      transform: scale(1.02) translateY(-5px);
+      border-color: ${theme.colors.logoGreen};
+      box-shadow: 0 12px 30px rgba(187, 204, 187, 0.25);
     }
     
     @media (min-width: ${theme.breakpoints.md}) {
@@ -136,7 +169,16 @@ export const ScreenshotGallery = styled.div`
     }
   }
   
-  @media (min-width: ${theme.breakpoints.md}) {
-    gap: 1.5rem;
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  &:hover {
+    animation-play-state: paused;
   }
 `
